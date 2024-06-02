@@ -25,6 +25,8 @@ log_info "Running: ${0##*/}"
 # TODO: Add here the config files with environmental variables
 FILES="
 ${CONFIG_DIR}/base.conf
+${CONFIG_DIR}/server_http.conf
+${CONFIG_DIR}/server_https.conf
 ${CONFIG_DIR}/main.conf
 ${CONFIG_DIR}/upstream_servers.conf
 "

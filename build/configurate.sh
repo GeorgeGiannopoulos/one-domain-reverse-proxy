@@ -37,9 +37,17 @@ mkdir -p "${NGINX_CUSTOM_CONFIG_DIR}"
 
 # Copy configuration file
 #
+# server_http.conf or server_https.conf
+if [[ "${HTTPS_ENABLED}" == 'true' ]]; then
+    log_info "Coping '${CONFIG_DIR}/server_https.conf' to '${NGINX_DEFAULT_CONFIG_DIR}/server_https.conf'"
+    cp "${CONFIG_DIR}/server_https.conf" "${NGINX_DEFAULT_CONFIG_DIR}/server_https.conf"
+else
+    log_info "Coping '${CONFIG_DIR}/server_http.conf' to '${NGINX_DEFAULT_CONFIG_DIR}/server_http.conf'"
+    cp "${CONFIG_DIR}/server_http.conf" "${NGINX_DEFAULT_CONFIG_DIR}/server_http.conf"
+fi
 # base.conf
-log_info "Coping '${CONFIG_DIR}/base.conf' to '${NGINX_DEFAULT_CONFIG_DIR}/base.conf'"
-cp "${CONFIG_DIR}/base.conf" "${NGINX_DEFAULT_CONFIG_DIR}/base.conf"
+log_info "Coping '${CONFIG_DIR}/base.conf' to '${NGINX_CUSTOM_CONFIG_DIR}/base.conf'"
+cp "${CONFIG_DIR}/base.conf" "${NGINX_CUSTOM_CONFIG_DIR}/base.conf"
 # common_headers.conf
 log_info "Coping '${CONFIG_DIR}/common_headers.conf' to '${NGINX_CUSTOM_CONFIG_DIR}/common_headers.conf'"
 cp "${CONFIG_DIR}/common_headers.conf" "${NGINX_CUSTOM_CONFIG_DIR}/common_headers.conf"

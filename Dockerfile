@@ -3,6 +3,7 @@ FROM nginx:latest
 # TODO: Add here the project's domain
 ENV PROJECT_DOMAIN='project.domain.gr' \
     EXECUTION_MODE='production' \
+    HTTPS_ENABLED=true \
     CERT_STAGING=0 \
     CONFIG_DIR='/config'
 

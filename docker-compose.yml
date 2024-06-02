@@ -1,0 +1,33 @@
+version: '3.8'
+name: projectname
+services:
+    reverse-proxy:
+        image: .../path/to/repo/reverse-proxy:latest
+        build: .
+        container_name: projectname-reverse-proxy
+        environment:
+            - EXECUTION_MODE=${EXECUTION_MODE:-production}    # NOTE: Can be overridden by environment
+            - PROJECT_DOMAIN=${SERVER_URL:-xxx.domain.gr}        # NOTE: Can be overridden by environment
+            - HTTPS_ENABLED=true                              # true: only HTTPS, false: only HTTP
+            - EXECUTION_STAGE=${EXECUTION_STAGE:-production}  # NOTE: Can be overridden by environment
+            - CERT_STAGING=0                                  # NOTE: Set to 1 if you're testing your setup to avoid hitting request limits
+            - FRONTEND=frontend
+            - FRONTEND_PORT=80
+            - BACKEND=backend
+            - BACKEND_PORT=8000
+        restart: unless-stopped
+        volumes:
+            - certificates:/etc/ssl/live    # Where nginx certificates are stored (dummy or valid ones)
+            - letsencrypt:/etc/letsencrypt  # Where certbot stores the certificates before coping them to the above dir
+        # links:
+        #     - frontend
+        #     - backend
+        # depends_on:
+        #     - frontend  # Wait for frontend server to start
+        #     - backend   # Wait for backend server to start
+        ports:
+            - "80:80"    # HTTP protocol connection
+            - "443:443"  # HTTPS protocol connection
+volumes:
+    certificates:
+    letsencrypt:

@@ -33,6 +33,12 @@ source "/build/functions.sh"
 log_info "Running: ${0##*/}"
 log_env
 
+# Check if HTTPS is enabled
+if [[ "${HTTPS_ENABLED}" == 'false' ]]; then
+    log_info "HTTPS is not enabled. Ignoring certificates generation"
+    exit 0
+fi
+
 mkdir -p "${SSL_CERTIFICATES_DIR}"
 
 # Check if execution mode is set
@@ -42,7 +48,7 @@ if [[ -z "${EXECUTION_MODE}" ]]; then
 fi
 
 if [[ "${EXECUTION_MODE}" != 'production' && "${EXECUTION_MODE}" != 'development' ]]; then
-    log_error "Unknown EXECUTION_MODE variable: '${EXECUTION_MODE}'"
+    log_error "Unkwown EXECUTION_MODE variable: '${EXECUTION_MODE}'"
     exit 1
 fi
 

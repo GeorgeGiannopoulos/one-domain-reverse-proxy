@@ -13,6 +13,7 @@
 # --------------------------------------------------------------------------------------------------
 EXECUTION_MODE="${EXECUTION_MODE:-production}"  # Options: 'production', 'deployment'
 PROJECT_DOMAIN="${PROJECT_DOMAIN:-project.domain.gr}"  # TODO: Add here the project's domain
+HTTPS_ENABLED="${HTTPS_ENABLED:-true}"
 CERT_STAGING="${CERT_STAGING:-0}"  # Options: 0, 1  # NOTE: Set to 1 if you're testing your setup to avoid hitting request limits
 
 
@@ -66,6 +67,7 @@ log_env() {
     # Log Environmental Variables
     log_info "Execution Mode   : '${EXECUTION_MODE}'"
     log_info "Execution URL    : '${PROJECT_DOMAIN}'"
+    log_info "HTTPS Enabled    : '${HTTPS_ENABLED}'"
     log_info "Cert Staging Mode: '${CERT_STAGING}'"
 }
 
